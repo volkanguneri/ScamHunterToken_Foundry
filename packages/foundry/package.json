@@ -13,11 +13,17 @@
     "generate": "node script/generateAccount.js",
     "lint": "forge fmt --check && prettier --check ./script/**/*.js",
     "test": "forge test",
-    "verify": "forge build --build-info --build-info-path out/build-info/ && forge script script/VerifyAll.s.sol --ffi --rpc-url ${1:-default_network}"
+    "verify": "forge build --build-info --build-info-path out/build-info/ && forge script script/VerifyAll.s.sol --ffi --rpc-url ${1:-default_network}",
+    "set:pw": "npx env-enc set-pw",
+    "set:env": "npx env-enc set",
+    "env:view": "npx env-enc view",
+    "simulate": "node script/Simulate.js"
   },
   "dependencies": {
+    "@chainlink/contracts": "^1.2.0",
+    "@chainlink/env-enc": "^1.0.5",
     "@chainlink/functions-toolkit": "^0.3.0",
-    "dotenv": "~16.3.1",
+    "dotenv": "^16.4.5",
     "envfile": "~6.18.0",
     "ethers": "~5.7.1",
     "prettier": "~2.8.8",

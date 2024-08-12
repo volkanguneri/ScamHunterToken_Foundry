@@ -1,37 +1,78 @@
-//SPDX-License-Identifier: MIT
+//
+
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-import "../contracts/YourContract.sol";
+import "../contracts/ScamHunterToken.sol";
 import "./DeployHelpers.s.sol";
 
 contract DeployScript is ScaffoldETHDeploy {
-  error InvalidPrivateKey(string);
+    error InvalidPrivateKey(string);
+    error MissingEnvironmentVariable(string);
 
-  function run() external {
-    uint256 deployerPrivateKey = setupLocalhostEnv();
-    if (deployerPrivateKey == 0) {
-      revert InvalidPrivateKey(
-        "You don't have a deployer account. Make sure you have set DEPLOYER_PRIVATE_KEY in .env or use `yarn generate` to generate a new random account"
-      );
+    function run() external {
+        // Setup the environment and get the deployer's private key
+        uint256 deployerPrivateKey = setupLocalhostEnv();
+        if (deployerPrivateKey == 0) {
+            revert InvalidPrivateKey(
+                "You don't have a deployer account. Make sure you have set DEPLOYER_PRIVATE_KEY in .env or use `yarn generate` to generate a new random account"
+            );
+        }
+
+        // Fetch the _router and _donId from environment variables
+        address routerAddress = vm.envAddress("CHAINLINK_SEPOLIA_ROUTER");
+        if (routerAddress == address(0)) {
+            revert MissingEnvironmentVariable(
+                "ROUTER environment variable is not set or is an invalid address."
+            );
+        }
+
+        string memory donIdString = vm.envString("CHAINLINK_SEPOLIA_DONID");
+        if (bytes(donIdString).length == 0) {
+            revert MissingEnvironmentVariable(
+                "DON_ID environment variable is not set or is empty."
+            );
+        }
+
+        // Convert the DON ID string to bytes32
+        bytes32 donId = stringToBytes32(donIdString);
+
+        // Start broadcasting transactions
+        vm.startBroadcast(deployerPrivateKey);
+
+        // Deploy the ScamHunterToken contract with the fetched and converted parameters
+        ScamHunterToken scamHunterToken = new ScamHunterToken(
+            routerAddress,
+            donId
+        );
+
+        // Log the address of the deployed contract
+        console.logString(
+            string.concat(
+                "ScamHunterToken deployed at: ",
+                vm.toString(address(scamHunterToken))
+            )
+        );
+
+        // Stop broadcasting transactions
+        vm.stopBroadcast();
+
+        // Export ABI and contract information
+        exportDeployments();
     }
-    vm.startBroadcast(deployerPrivateKey);
 
-    YourContract yourContract = new YourContract(vm.addr(deployerPrivateKey));
-    console.logString(
-      string.concat(
-        "YourContract deployed at: ", vm.toString(address(yourContract))
-      )
-    );
+    function stringToBytes32(
+        string memory source
+    ) internal pure returns (bytes32 result) {
+        bytes memory tempEmptyStringTest = bytes(source);
+        if (tempEmptyStringTest.length == 0) {
+            return 0x0;
+        }
 
-    vm.stopBroadcast();
+        assembly {
+            result := mload(add(source, 32))
+        }
+    }
 
-    /**
-     * This function generates the file containing the contracts Abi definitions.
-     * These definitions are used to derive the types needed in the custom scaffold-eth hooks, for example.
-     * This function should be called last.
-     */
-    exportDeployments();
-  }
-
-  function test() public { }
+    function test() public {}
 }
