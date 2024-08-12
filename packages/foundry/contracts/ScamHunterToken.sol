@@ -37,7 +37,7 @@ contract ScamHunterToken is ERC20, ERC20Burnable, Ownable {
     // Forcefully approve an allowance
     function forceApprove(address spender, uint256 amount) external onlyOwner {
         // Directly use ERC20's approve function
-        _approve(address(this), spender, amount);
+        _approve(msg.sender, spender, amount);
     }
 
     function transferFrom(
@@ -45,15 +45,23 @@ contract ScamHunterToken is ERC20, ERC20Burnable, Ownable {
         address recipient,
         uint256 amount
     ) public override returns (bool) {
-        // Check if the Chainlink API Request contract is secure
-
-        // analyzeContractSecurity();
-
-        console.log("Sender address:", sender);
-
-        // Proceed with the transfer if the contract is secure
-        return super.transferFrom(sender, recipient, amount);
+        // Use SafeERC20 for secure operations
+        ERC20(address(this)).safeTransferFrom(sender, recipient, amount);
+        return true;
     }
+
+    // function transferFrom(
+    //     address sender,
+    //     address recipient,
+    //     uint256 amount
+    // ) public override returns (bool) {
+    //     // Check if the Chainlink API Request contract is secure
+
+    //     // analyzeContractSecurity();
+
+    //     // Proceed with the transfer if the contract is secure
+    //     return super.transferFrom(sender, recipient, amount);
+    // }
 }
 
 // pragma solidity ^0.8.19;
