@@ -20,6 +20,7 @@ contract DeployScript is ScaffoldETHDeploy {
         }
 
         // Fetch the _router and _donId from environment variables
+
         address routerAddress = vm.envAddress("CHAINLINK_SEPOLIA_ROUTER");
         if (routerAddress == address(0)) {
             revert MissingEnvironmentVariable(
@@ -27,15 +28,12 @@ contract DeployScript is ScaffoldETHDeploy {
             );
         }
 
-        string memory donIdString = vm.envString("CHAINLINK_SEPOLIA_DONID");
-        if (bytes(donIdString).length == 0) {
+        bytes32 donIdBytes32 = vm.envBytes32("CHAINLINK_SEPOLIA_DONID");
+        if (donIdBytes32 == bytes32(0)) {
             revert MissingEnvironmentVariable(
-                "DON_ID environment variable is not set or is empty."
+                "DONID environment variable is not set or is an invalid address."
             );
         }
-
-        // Convert the DON ID string to bytes32
-        bytes32 donId = stringToBytes32(donIdString);
 
         // Start broadcasting transactions
         vm.startBroadcast(deployerPrivateKey);
@@ -43,7 +41,7 @@ contract DeployScript is ScaffoldETHDeploy {
         // Deploy the ScamHunterToken contract with the fetched and converted parameters
         ScamHunterToken scamHunterToken = new ScamHunterToken(
             routerAddress,
-            donId
+            donIdBytes32
         );
 
         // Log the address of the deployed contract

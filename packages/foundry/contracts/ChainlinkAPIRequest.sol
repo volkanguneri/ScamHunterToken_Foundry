@@ -23,7 +23,7 @@ contract ChainlinkAPIRequest is FunctionsClient, ConfirmedOwner {
     string public latestAiAnalysis;
 
     // emits: price Analysis event.
-    event AiAnalysis(string latestAiAnalysis);
+    event AIAnalysis(string latestAIAnalysis);
 
     // emits: OCRResponse event.
     event OCRResponse(bytes32 indexed requestId, bytes result, bytes err);
@@ -117,7 +117,7 @@ contract ChainlinkAPIRequest is FunctionsClient, ConfirmedOwner {
 
         // converts: latest response to a (human-readable) string.
         latestAiAnalysis = string(abi.encodePacked(response));
-        emit AiAnalysis(latestAiAnalysis);
+        emit AIAnalysis(latestAiAnalysis);
 
         //////////////////////////// [D] ////////////////////////////
     }
