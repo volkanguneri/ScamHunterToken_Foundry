@@ -13,7 +13,9 @@ const simulate = async () => {
 
     // simulate: JavaScript execution locally.
     const { responseBytesHexstring, errorString, capturedTerminalOutput } = await simulateScript(requestConfig)
-    console.log(`${capturedTerminalOutput}\n`)
+
+    console.log("🚀 ~ simulate ~ capturedTerminalOutput:", capturedTerminalOutput)
+
     if (responseBytesHexstring) {
         console.log(
             `Response returned by script during local simulation: ${decodeResult(
@@ -21,7 +23,10 @@ const simulate = async () => {
                 requestConfig.expectedReturnType
             ).toString()}\n`
         )
+    } else {
+        console.log("🚀 responseBytesHexstring:", responseBytesHexstring)
     }
+
     if (errorString) {
         console.log(`Error returned by simulated script:\n${errorString}\n`)
     }

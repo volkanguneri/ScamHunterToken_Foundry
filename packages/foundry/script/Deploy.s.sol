@@ -4,6 +4,7 @@
 pragma solidity ^0.8.19;
 
 import "../contracts/ScamHunterToken.sol";
+import "../contracts/Basic.sol";
 import "./DeployHelpers.s.sol";
 
 contract DeployScript is ScaffoldETHDeploy {
@@ -52,24 +53,19 @@ contract DeployScript is ScaffoldETHDeploy {
             )
         );
 
+        // Deploy the Basic contract
+        Basic basic = new Basic();
+
+        // Log the address of the deployed Basic contract
+        console.logString(
+            string.concat("Basic deployed at: ", vm.toString(address(basic)))
+        );
+
         // Stop broadcasting transactions
         vm.stopBroadcast();
 
         // Export ABI and contract information
         exportDeployments();
-    }
-
-    function stringToBytes32(
-        string memory source
-    ) internal pure returns (bytes32 result) {
-        bytes memory tempEmptyStringTest = bytes(source);
-        if (tempEmptyStringTest.length == 0) {
-            return 0x0;
-        }
-
-        assembly {
-            result := mload(add(source, 32))
-        }
     }
 
     function test() public {}

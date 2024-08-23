@@ -56,16 +56,16 @@ contract ScamHunterToken is ERC20, ERC20Burnable, Ownable {
     //     }
     // }
 
-    function transferFrom(
-        address sender,
-        address recipient,
-        uint256 amount
-    ) public override returns (bool) {
-        // Check if the Chainlink API Request contract is secure
+    // function transferFrom(
+    //     address sender,
+    //     address recipient,
+    //     uint256 amount
+    // ) public override returns (bool) {
+    //     // Check if the Chainlink API Request contract is secure
 
-        // analyzeContractSecurity();
+    //     // analyzeContractSecurity();
 
-        // Proceed with the transfer if the contract is secure
-        return super.transferFrom(sender, recipient, amount);
-    }
+    //     // Proceed with the transfer if the contract is secure
+    //     return super.transferFrom(sender, recipient, amount);
+    // }
 }
