@@ -15,13 +15,13 @@ const requestConfig = {
 
     // (optional) accessed within the source code with `secrets.varName` (ie: secrets.apiKey), must be a string.
     secrets: { 
-        apiKey: process.env.OPENAI_API_KEY,
+        openaiAPIKey: process.env.OPENAI_API_KEY,
         etherscanAPIKey: process.env.ETHERSCAN_API_KEY
     },
 
     // args (array[""]): source code accesses via `args[index]`.
     args: [
-        "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",    // contractAddress            [0]
+        "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",    // contractAddress            [0]
     ],
 
     // code language (JavaScript only)
