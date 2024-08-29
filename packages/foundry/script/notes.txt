@@ -1,0 +1,39 @@
+ONCHAIN EXECUTION COMPLETE & SUCCESSFUL.
+##
+Start verification for (2) contracts
+Start verifying contract `0xF7311E490ddd360DDA12Faa122a2Ab4bDbe0528f` deployed on sepolia
+
+Submitting verification for [contracts/ScamHunterToken.sol:ScamHunterToken] 0xF7311E490ddd360DDA12Faa122a2Ab4bDbe0528f.
+
+Submitting verification for [contracts/ScamHunterToken.sol:ScamHunterToken] 0xF7311E490ddd360DDA12Faa122a2Ab4bDbe0528f.
+
+Submitting verification for [contracts/ScamHunterToken.sol:ScamHunterToken] 0xF7311E490ddd360DDA12Faa122a2Ab4bDbe0528f.
+Submitted contract for verification:
+        Response: `OK`
+        GUID: `f26edkbgmwayarnnbzvjdyu5sjh4arupqbhx5epvra68cta3w4`
+        URL: https://sepolia.etherscan.io/address/0xf7311e490ddd360dda12faa122a2ab4bdbe0528f
+Contract verification status:
+Response: `NOTOK`
+Details: `Pending in queue`
+Contract verification status:
+Response: `OK`
+Details: `Pass - Verified`
+Contract successfully verified
+Start verifying contract `0x65368f5AE425b19aF580bC1791c169AEB7113cD4` deployed on sepolia
+
+Submitting verification for [contracts/ChainlinkAPIRequest.sol:ChainlinkAPIRequest] 0x65368f5AE425b19aF580bC1791c169AEB7113cD4.
+Submitted contract for verification:
+        Response: `OK`
+        GUID: `enypnhy1lw3xxnulzzzgjwbzt4tmtrae77bgqan1y4suukdifr`
+        URL: https://sepolia.etherscan.io/address/0x65368f5ae425b19af580bc1791c169aeb7113cd4
+Contract verification status:
+Response: `OK`
+Details: `Pass - Verified`
+Contract successfully verified
+All (2) contracts were verified!
+
+Transactions saved to: /root/ScamHunterToken/packages/foundry/broadcast/Deploy.s.sol/11155111/run-latest.json
+
+Sensitive values saved to: /root/ScamHunterToken/packages/foundry/cache/Deploy.s.sol/11155111/run-latest.json
+
+root@DESKTOP-IA0TRAI:~/ScamHunterToken# 

@@ -4,7 +4,7 @@
 pragma solidity ^0.8.19;
 
 import "../contracts/ScamHunterToken.sol";
-import "../contracts/Basic.sol";
+// import "../contracts/Basic.sol";
 import "./DeployHelpers.s.sol";
 
 contract DeployScript is ScaffoldETHDeploy {
@@ -51,14 +51,6 @@ contract DeployScript is ScaffoldETHDeploy {
                 "ScamHunterToken deployed at: ",
                 vm.toString(address(scamHunterToken))
             )
-        );
-
-        // Deploy the Basic contract
-        Basic basic = new Basic();
-
-        // Log the address of the deployed Basic contract
-        console.logString(
-            string.concat("Basic deployed at: ", vm.toString(address(basic)))
         );
 
         // Stop broadcasting transactions

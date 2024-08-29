@@ -19,8 +19,9 @@ if (etherscanResponse.error) {
 
 // Check if data and result are defined in the response
 if (!etherscanResponse.data || !etherscanResponse.data.result || etherscanResponse.data.result.length === 0) {
-    throw new Error('Invalid response from Etherscan API or contract not found.');
+  throw new Error('Invalid response from Etherscan API or contract not found.');
 }
+// console.log("🚀 ~ etherscanResponse:", etherscanResponse)
 
 // Retrieve the content of the response
 const sourceCodeJson = etherscanResponse.data.result[0].SourceCode;
@@ -37,35 +38,59 @@ try {
 // Declare variable to store the combined content of all contract files
 let contractContent = "";
 
-// Check if the sources object is present
+// // Check if the sources object is present
+// if (parsedSourceCode && parsedSourceCode.sources) {
+//     // Iterate through each file in the sources object
+//     for (const [filePath, fileDetails] of Object.entries(parsedSourceCode.sources)) {
+//         // Access the content of each file and concatenate it
+//         contractContent += fileDetails.content + '\n'; // Append content with newline
+//       }
+//     }
+
+// Vérifiez si la source du code est présente et extrayez le premier fichier si possible
 if (parsedSourceCode && parsedSourceCode.sources) {
-    // Iterate through each file in the sources object
-    for (const [filePath, fileDetails] of Object.entries(parsedSourceCode.sources)) {
-        // Access the content of each file and concatenate it
-        contractContent += fileDetails.content + '\n'; // Append content with newline
+  // Obtenez les clés de tous les fichiers disponibles dans l'objet sources
+  const fileKeys = Object.keys(parsedSourceCode.sources);
+  
+  // Vérifiez s'il y a au moins un fichier dans la liste
+  if (fileKeys.length > 0) {
+    // Obtenez la première clé (nom du fichier)
+    const firstFileKey = fileKeys[0];
+    
+    // Vérifiez si le contenu du fichier est défini et non vide
+    if (parsedSourceCode.sources[firstFileKey] && parsedSourceCode.sources[firstFileKey].content) {
+      // Extraire le contenu du premier fichier
+      const firstFileContent = parsedSourceCode.sources[firstFileKey].content;
+      
+      // Assigner le contenu à la variable contractContent
+      contractContent = firstFileContent;
+    } else {
+      throw new Error(`Le contenu du fichier ${firstFileKey} est manquant ou vide.`);
     }
+  } else {
+    throw new Error('Aucun fichier trouvé dans l\'objet sources.');
+  }
+} else {
+  throw new Error('L\'objet sources est absent ou mal formaté.');
 }
 
+if (!contractContent) {
+    throw new Error('Le contenu du contrat est vide. Impossible de poursuivre.');
+}
+
+console.log("🚀 ~ contractContent:", contractContent)
+// return Functions.encodeString(contractContent);
+
+
+
+    
+    // console.log("🚀 ~ contractContent:", contractContent)
 // Log the aggregated content (for debugging purposes)
 // console.log(`🚀 ~ content of contract:`, contractContent);
 
 
 // [3] PROMPT ENGINEERING //
-const prompt = `Analyse the smart contract in one sentence tell what is the risk for security if interacted with: ${contractContent}`;
-// const prompt = `Analyse the smart contract in one sentence tell what is the risk for security if interacted with: //SPDX-License-Identifier: MIT
-// pragma solidity >=0.8.0 <0.9.0;
-
-// contract Basic {
-//     uint256 numberA = 1;
-//     uint256 numberB = 2;
-
-//     constructor() {}
-
-//     function total() external view returns (uint256) {
-//         return (numberA + numberB);
-//     }
-// }
-// `;
+const prompt = `Analyse the smart contract, tell in one sentence what is the risk to interact with: ${contractContent}`;
 
 // [4] I DATA REQUEST //
 let openAIRequest;
@@ -74,7 +99,6 @@ try {
   if (!secrets.openaiAPIKey) {
     throw new Error("OpenAI API key is missing. Please ensure it is set correctly.");
   }
-
 
   // Make the OpenAI API request
   openAIRequest = await Functions.makeHttpRequest({

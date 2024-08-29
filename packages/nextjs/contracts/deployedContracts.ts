@@ -489,7 +489,7 @@ const deployedContracts = {
   },
   11155111: {
     ScamHunterToken: {
-      address: "0xa891b585cea28e1a63230e4b4651cda98aa97fb1",
+      address: "0xf7311e490ddd360dda12faa122a2ab4bdbe0528f",
       abi: [
         {
           type: "constructor",
@@ -943,30 +943,6 @@ const deployedContracts = {
         renounceOwnership: "lib/openzeppelin-contracts/contracts/access/Ownable.sol",
         transferOwnership: "lib/openzeppelin-contracts/contracts/access/Ownable.sol",
       },
-    },
-    Basic: {
-      address: "0x7d33a92cadc17124bd4ec9b4e7aeb2ead5bc59c4",
-      abi: [
-        {
-          type: "constructor",
-          inputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "total",
-          inputs: [],
-          outputs: [
-            {
-              name: "",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          stateMutability: "view",
-        },
-      ],
-      inheritedFunctions: {},
     },
   },
 } as const;
