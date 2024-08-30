@@ -21,7 +21,7 @@ const requestConfig = {
 
     // args (array[""]): source code accesses via `args[index]`.
     args: [
-        "0xF7311E490ddd360DDA12Faa122a2Ab4bDbe0528f",    // contractAddress            [0]
+        "0xF7311E490ddd360DDA12Faa122a2Ab4bDbe0528f",    // contractAddress [0]
     ],
 
     // code language (JavaScript only)

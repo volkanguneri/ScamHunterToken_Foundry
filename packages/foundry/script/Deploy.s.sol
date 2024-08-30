@@ -4,7 +4,8 @@
 pragma solidity ^0.8.19;
 
 import "../contracts/ScamHunterToken.sol";
-// import "../contracts/Basic.sol";
+import "../contracts/ChainlinkAPIRequest.sol";
+
 import "./DeployHelpers.s.sol";
 
 contract DeployScript is ScaffoldETHDeploy {
@@ -39,8 +40,7 @@ contract DeployScript is ScaffoldETHDeploy {
         // Start broadcasting transactions
         vm.startBroadcast(deployerPrivateKey);
 
-        // Deploy the ScamHunterToken contract with the fetched and converted parameters
-        ScamHunterToken scamHunterToken = new ScamHunterToken(
+        ChainlinkAPIRequest chainlinkAPIRequest = new ChainlinkAPIRequest(
             routerAddress,
             donIdBytes32
         );
@@ -48,10 +48,24 @@ contract DeployScript is ScaffoldETHDeploy {
         // Log the address of the deployed contract
         console.logString(
             string.concat(
-                "ScamHunterToken deployed at: ",
-                vm.toString(address(scamHunterToken))
+                "ChainlinkAPIRequest deployed at: ",
+                vm.toString(address(chainlinkAPIRequest))
             )
         );
+
+        // // Deploy the ScamHunterToken contract with the fetched and converted parameters
+        // ScamHunterToken scamHunterToken = new ScamHunterToken(
+        //     routerAddress,
+        //     donIdBytes32
+        // );
+
+        // // Log the address of the deployed contract
+        // console.logString(
+        //     string.concat(
+        //         "ScamHunterToken deployed at: ",
+        //         vm.toString(address(scamHunterToken))
+        //     )
+        // );
 
         // Stop broadcasting transactions
         vm.stopBroadcast();

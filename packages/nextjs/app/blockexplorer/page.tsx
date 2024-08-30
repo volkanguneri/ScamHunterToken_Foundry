@@ -16,6 +16,8 @@ const BlockExplorer: NextPage = () => {
 
   useEffect(() => {
     if (targetNetwork.id !== hardhat.id) {
+      console.log("🚀 ~ useEffect ~ targetNetwork:", targetNetwork);
+      console.log("🚀 ~ useEffect ~ hardhat.id:", hardhat.id);
       setIsLocalNetwork(false);
     }
   }, [targetNetwork.id]);

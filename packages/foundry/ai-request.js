@@ -38,15 +38,6 @@ try {
 // Declare variable to store the combined content of all contract files
 let contractContent = "";
 
-// // Check if the sources object is present
-// if (parsedSourceCode && parsedSourceCode.sources) {
-//     // Iterate through each file in the sources object
-//     for (const [filePath, fileDetails] of Object.entries(parsedSourceCode.sources)) {
-//         // Access the content of each file and concatenate it
-//         contractContent += fileDetails.content + '\n'; // Append content with newline
-//       }
-//     }
-
 // Vérifiez si la source du code est présente et extrayez le premier fichier si possible
 if (parsedSourceCode && parsedSourceCode.sources) {
   // Obtenez les clés de tous les fichiers disponibles dans l'objet sources
@@ -79,15 +70,6 @@ if (!contractContent) {
 }
 
 console.log("🚀 ~ contractContent:", contractContent)
-// return Functions.encodeString(contractContent);
-
-
-
-    
-    // console.log("🚀 ~ contractContent:", contractContent)
-// Log the aggregated content (for debugging purposes)
-// console.log(`🚀 ~ content of contract:`, contractContent);
-
 
 // [3] PROMPT ENGINEERING //
 const prompt = `Analyse the smart contract, tell in one sentence what is the risk to interact with: ${contractContent}`;

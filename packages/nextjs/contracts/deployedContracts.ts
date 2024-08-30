@@ -6,14 +6,14 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 
 const deployedContracts = {
   31337: {
-    ScamHunterToken: {
-      address: "0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0",
+    ChainlinkAPIRequest: {
+      address: "0xcf7ed3acca5a467e9e704c703e8d87f634fb0fc9",
       abi: [
         {
           type: "constructor",
           inputs: [
             {
-              name: "_router",
+              name: "router",
               type: "address",
               internalType: "address",
             },
@@ -27,118 +27,89 @@ const deployedContracts = {
         },
         {
           type: "function",
-          name: "allowance",
-          inputs: [
-            {
-              name: "owner",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "spender",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "approve",
-          inputs: [
-            {
-              name: "spender",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "value",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "bool",
-              internalType: "bool",
-            },
-          ],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "balanceOf",
-          inputs: [
-            {
-              name: "account",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "burn",
-          inputs: [
-            {
-              name: "value",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
+          name: "acceptOwnership",
+          inputs: [],
           outputs: [],
           stateMutability: "nonpayable",
         },
         {
           type: "function",
-          name: "burnFrom",
-          inputs: [
-            {
-              name: "account",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "value",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "decimals",
+          name: "donId",
           inputs: [],
           outputs: [
             {
               name: "",
-              type: "uint8",
-              internalType: "uint8",
+              type: "bytes32",
+              internalType: "bytes32",
             },
           ],
           stateMutability: "view",
         },
         {
           type: "function",
-          name: "name",
+          name: "handleOracleFulfillment",
+          inputs: [
+            {
+              name: "requestId",
+              type: "bytes32",
+              internalType: "bytes32",
+            },
+            {
+              name: "response",
+              type: "bytes",
+              internalType: "bytes",
+            },
+            {
+              name: "err",
+              type: "bytes",
+              internalType: "bytes",
+            },
+          ],
+          outputs: [],
+          stateMutability: "nonpayable",
+        },
+        {
+          type: "function",
+          name: "latestError",
+          inputs: [],
+          outputs: [
+            {
+              name: "",
+              type: "bytes",
+              internalType: "bytes",
+            },
+          ],
+          stateMutability: "view",
+        },
+        {
+          type: "function",
+          name: "latestRequestId",
+          inputs: [],
+          outputs: [
+            {
+              name: "",
+              type: "bytes32",
+              internalType: "bytes32",
+            },
+          ],
+          stateMutability: "view",
+        },
+        {
+          type: "function",
+          name: "latestResponse",
+          inputs: [],
+          outputs: [
+            {
+              name: "",
+              type: "bytes",
+              internalType: "bytes",
+            },
+          ],
+          stateMutability: "view",
+        },
+        {
+          type: "function",
+          name: "latestResponseReadable",
           inputs: [],
           outputs: [
             {
@@ -164,88 +135,58 @@ const deployedContracts = {
         },
         {
           type: "function",
-          name: "renounceOwnership",
-          inputs: [],
+          name: "sendRequest",
+          inputs: [
+            {
+              name: "source",
+              type: "string",
+              internalType: "string",
+            },
+            {
+              name: "secretsLocation",
+              type: "uint8",
+              internalType: "enum FunctionsRequest.Location",
+            },
+            {
+              name: "encryptedSecretsReference",
+              type: "bytes",
+              internalType: "bytes",
+            },
+            {
+              name: "args",
+              type: "string[]",
+              internalType: "string[]",
+            },
+            {
+              name: "bytesArgs",
+              type: "bytes[]",
+              internalType: "bytes[]",
+            },
+            {
+              name: "subscriptionId",
+              type: "uint64",
+              internalType: "uint64",
+            },
+            {
+              name: "callbackGasLimit",
+              type: "uint32",
+              internalType: "uint32",
+            },
+          ],
           outputs: [],
           stateMutability: "nonpayable",
         },
         {
           type: "function",
-          name: "symbol",
-          inputs: [],
-          outputs: [
-            {
-              name: "",
-              type: "string",
-              internalType: "string",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "totalSupply",
-          inputs: [],
-          outputs: [
-            {
-              name: "",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "transfer",
+          name: "setDonId",
           inputs: [
             {
-              name: "to",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "value",
-              type: "uint256",
-              internalType: "uint256",
+              name: "newDonId",
+              type: "bytes32",
+              internalType: "bytes32",
             },
           ],
-          outputs: [
-            {
-              name: "",
-              type: "bool",
-              internalType: "bool",
-            },
-          ],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "transferFrom",
-          inputs: [
-            {
-              name: "from",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "to",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "value",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "bool",
-              internalType: "bool",
-            },
-          ],
+          outputs: [],
           stateMutability: "nonpayable",
         },
         {
@@ -253,7 +194,7 @@ const deployedContracts = {
           name: "transferOwnership",
           inputs: [
             {
-              name: "newOwner",
+              name: "to",
               type: "address",
               internalType: "address",
             },
@@ -263,31 +204,57 @@ const deployedContracts = {
         },
         {
           type: "event",
-          name: "AnalyzeFailed",
-          inputs: [],
+          name: "LatestResponse",
+          inputs: [
+            {
+              name: "latestResponseReadable",
+              type: "string",
+              indexed: false,
+              internalType: "string",
+            },
+          ],
           anonymous: false,
         },
         {
           type: "event",
-          name: "Approval",
+          name: "OCRResponse",
           inputs: [
             {
-              name: "owner",
-              type: "address",
+              name: "requestId",
+              type: "bytes32",
               indexed: true,
-              internalType: "address",
+              internalType: "bytes32",
             },
             {
-              name: "spender",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "value",
-              type: "uint256",
+              name: "result",
+              type: "bytes",
               indexed: false,
-              internalType: "uint256",
+              internalType: "bytes",
+            },
+            {
+              name: "err",
+              type: "bytes",
+              indexed: false,
+              internalType: "bytes",
+            },
+          ],
+          anonymous: false,
+        },
+        {
+          type: "event",
+          name: "OwnershipTransferRequested",
+          inputs: [
+            {
+              name: "from",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
+            {
+              name: "to",
+              type: "address",
+              indexed: true,
+              internalType: "address",
             },
           ],
           anonymous: false,
@@ -297,25 +264,6 @@ const deployedContracts = {
           name: "OwnershipTransferred",
           inputs: [
             {
-              name: "previousOwner",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "newOwner",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-          ],
-          anonymous: false,
-        },
-        {
-          type: "event",
-          name: "Transfer",
-          inputs: [
-            {
               name: "from",
               type: "address",
               indexed: true,
@@ -327,164 +275,62 @@ const deployedContracts = {
               indexed: true,
               internalType: "address",
             },
+          ],
+          anonymous: false,
+        },
+        {
+          type: "event",
+          name: "RequestFulfilled",
+          inputs: [
             {
-              name: "value",
-              type: "uint256",
-              indexed: false,
-              internalType: "uint256",
+              name: "id",
+              type: "bytes32",
+              indexed: true,
+              internalType: "bytes32",
+            },
+          ],
+          anonymous: false,
+        },
+        {
+          type: "event",
+          name: "RequestSent",
+          inputs: [
+            {
+              name: "id",
+              type: "bytes32",
+              indexed: true,
+              internalType: "bytes32",
             },
           ],
           anonymous: false,
         },
         {
           type: "error",
-          name: "ERC20InsufficientAllowance",
-          inputs: [
-            {
-              name: "spender",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "allowance",
-              type: "uint256",
-              internalType: "uint256",
-            },
-            {
-              name: "needed",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
+          name: "EmptyArgs",
+          inputs: [],
         },
         {
           type: "error",
-          name: "ERC20InsufficientBalance",
-          inputs: [
-            {
-              name: "sender",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "balance",
-              type: "uint256",
-              internalType: "uint256",
-            },
-            {
-              name: "needed",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
+          name: "EmptySource",
+          inputs: [],
         },
         {
           type: "error",
-          name: "ERC20InvalidApprover",
-          inputs: [
-            {
-              name: "approver",
-              type: "address",
-              internalType: "address",
-            },
-          ],
+          name: "NoInlineSecrets",
+          inputs: [],
         },
         {
           type: "error",
-          name: "ERC20InvalidReceiver",
-          inputs: [
-            {
-              name: "receiver",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-        },
-        {
-          type: "error",
-          name: "ERC20InvalidSender",
-          inputs: [
-            {
-              name: "sender",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-        },
-        {
-          type: "error",
-          name: "ERC20InvalidSpender",
-          inputs: [
-            {
-              name: "spender",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-        },
-        {
-          type: "error",
-          name: "OwnableInvalidOwner",
-          inputs: [
-            {
-              name: "owner",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-        },
-        {
-          type: "error",
-          name: "OwnableUnauthorizedAccount",
-          inputs: [
-            {
-              name: "account",
-              type: "address",
-              internalType: "address",
-            },
-          ],
+          name: "OnlyRouterCanFulfill",
+          inputs: [],
         },
       ],
       inheritedFunctions: {
-        allowance: "lib/openzeppelin-contracts/contracts/token/ERC20/extensions/ERC20Burnable.sol",
-        approve: "lib/openzeppelin-contracts/contracts/token/ERC20/extensions/ERC20Burnable.sol",
-        balanceOf: "lib/openzeppelin-contracts/contracts/token/ERC20/extensions/ERC20Burnable.sol",
-        decimals: "lib/openzeppelin-contracts/contracts/token/ERC20/extensions/ERC20Burnable.sol",
-        name: "lib/openzeppelin-contracts/contracts/token/ERC20/extensions/ERC20Burnable.sol",
-        symbol: "lib/openzeppelin-contracts/contracts/token/ERC20/extensions/ERC20Burnable.sol",
-        totalSupply: "lib/openzeppelin-contracts/contracts/token/ERC20/extensions/ERC20Burnable.sol",
-        transfer: "lib/openzeppelin-contracts/contracts/token/ERC20/extensions/ERC20Burnable.sol",
-        transferFrom: "lib/openzeppelin-contracts/contracts/token/ERC20/extensions/ERC20Burnable.sol",
-        burn: "lib/openzeppelin-contracts/contracts/token/ERC20/extensions/ERC20Burnable.sol",
-        burnFrom: "lib/openzeppelin-contracts/contracts/token/ERC20/extensions/ERC20Burnable.sol",
-        owner: "lib/openzeppelin-contracts/contracts/access/Ownable.sol",
-        renounceOwnership: "lib/openzeppelin-contracts/contracts/access/Ownable.sol",
-        transferOwnership: "lib/openzeppelin-contracts/contracts/access/Ownable.sol",
+        handleOracleFulfillment: "node_modules/@chainlink/contracts/src/v0.8/functions/v1_0_0/FunctionsClient.sol",
+        acceptOwnership: "node_modules/@chainlink/contracts/src/v0.8/shared/access/ConfirmedOwner.sol",
+        owner: "node_modules/@chainlink/contracts/src/v0.8/shared/access/ConfirmedOwner.sol",
+        transferOwnership: "node_modules/@chainlink/contracts/src/v0.8/shared/access/ConfirmedOwner.sol",
       },
-    },
-    Basic: {
-      address: "0xcf7ed3acca5a467e9e704c703e8d87f634fb0fc9",
-      abi: [
-        {
-          type: "constructor",
-          inputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "total",
-          inputs: [],
-          outputs: [
-            {
-              name: "",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          stateMutability: "view",
-        },
-      ],
-      inheritedFunctions: {},
     },
   },
   11155111: {
@@ -533,6 +379,44 @@ const deployedContracts = {
         },
         {
           type: "function",
+          name: "analyze",
+          inputs: [
+            {
+              name: "",
+              type: "address",
+              internalType: "address",
+            },
+          ],
+          outputs: [
+            {
+              name: "",
+              type: "string",
+              internalType: "string",
+            },
+          ],
+          stateMutability: "view",
+        },
+        {
+          type: "function",
+          name: "analyzed",
+          inputs: [
+            {
+              name: "",
+              type: "address",
+              internalType: "address",
+            },
+          ],
+          outputs: [
+            {
+              name: "",
+              type: "bool",
+              internalType: "bool",
+            },
+          ],
+          stateMutability: "view",
+        },
+        {
+          type: "function",
           name: "approve",
           inputs: [
             {
@@ -541,7 +425,7 @@ const deployedContracts = {
               internalType: "address",
             },
             {
-              name: "value",
+              name: "amount",
               type: "uint256",
               internalType: "uint256",
             },
@@ -604,6 +488,19 @@ const deployedContracts = {
           ],
           outputs: [],
           stateMutability: "nonpayable",
+        },
+        {
+          type: "function",
+          name: "contractAddress",
+          inputs: [],
+          outputs: [
+            {
+              name: "",
+              type: "address",
+              internalType: "address",
+            },
+          ],
+          stateMutability: "view",
         },
         {
           type: "function",
@@ -742,12 +639,6 @@ const deployedContracts = {
           ],
           outputs: [],
           stateMutability: "nonpayable",
-        },
-        {
-          type: "event",
-          name: "AnalyzeFailed",
-          inputs: [],
-          anonymous: false,
         },
         {
           type: "event",
